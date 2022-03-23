@@ -1,0 +1,23 @@
+connector:
+  name: github-johannesHarness
+  identifier: githubjohannesHarness
+  description:
+  orgIdentifier: default
+  projectIdentifier: bootcampcijohannes
+  type: Github
+  spec:
+    url: https://github.com/johannesHarness
+    validationRepo: harness-bootcamp
+    authentication:
+      type: Http
+      spec:
+        type: UsernameToken
+        spec:
+          username: johannesHarness
+          tokenRef: johannesHarness
+    apiAccess:
+      type: Token
+      spec:
+        tokenRef: johannesHarness
+    executeOnDelegate: true
+    type: Account
