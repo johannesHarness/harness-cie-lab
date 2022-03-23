@@ -1,0 +1,35 @@
+pipeline:
+    name: payment-service-new
+    identifier: paymentservicenew
+    allowStageExecutions: false
+    projectIdentifier: bootcampcijohannes
+    orgIdentifier: default
+    tags: {}
+    properties:
+        ci:
+            codebase:
+                connectorRef: githubjohannesHarness
+                repoName: harness-cie-lab
+                build: <+input>
+    stages:
+        - stage:
+              name: build
+              identifier: build
+              type: CI
+              spec:
+                  cloneCodebase: true
+                  infrastructure:
+                      type: KubernetesDirect
+                      spec:
+                          connectorRef: account.bootcampgkecluster
+                          namespace: payment-service-build
+                  execution:
+                      steps:
+                          - step:
+                                type: Run
+                                name: test
+                                identifier: test
+                                spec:
+                                    connectorRef: account.bootcampdockerhub
+                                    image: nikpap/mvn-openjdk-8:harness
+                                    command: ls
